@@ -14,6 +14,7 @@ class FoamRunner(object):
         out, err = foam_proc.communicate()
         status = foam_proc.poll()
         if status == 0:
+            print("Source openfoam env vars...")
             self.shell_source(self.source_path)
             return True
         else:
@@ -28,3 +29,7 @@ class FoamRunner(object):
         env = dict((line.decode().split('=') for line in output.splitlines() if '=' in line.decode()))
         os.environ.update(env)
         print('tutorials: ', os.environ['FOAM_TUTORIALS'])
+
+if __name__ == '__main__':
+    fr = FoamRunner()
+    fr.start()
