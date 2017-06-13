@@ -5,15 +5,15 @@ from unittest import TestCase
 class TestMeshComponents(TestCase):
     def test_vertices(self):
         v = Vertex3(0, 0, 0)
-        self.assertEqual('(0, 0, 0)', v.dict_string())
+        self.assertEqual('(0 0 0)', v.dict_string())
 
     def test_simple_grading(self):
         sg = SimpleGrading([1, 1, 1])
         self.assertEqual("simpleGrading (1 1 1)", sg.dict_string())
 
     def test_block(self):
-        sg = SimpleGrading([1, 1, 1])
-        b = Block(range(8), [20, 20, 1], sg)
+        sg = SimpleGrading([1.0, 1.0, 1.0])
+        b = Block(range(8), [20.0, 20.0, 1.0], sg)
         self.assertEqual("hex (0 1 2 3 4 5 6 7) (20 20 1) simpleGrading (1 1 1)", b.dict_string())
 
     def test_face(self):
