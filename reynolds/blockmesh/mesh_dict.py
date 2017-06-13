@@ -18,7 +18,7 @@ class MeshDict(object):
         return '\n'.join(s for s in header_comps)
 
     def meters_string(self):
-        return 'convertToMeters {}'.format(self.convert_to_meters)
+        return 'convertToMeters {};'.format(self.convert_to_meters)
 
     def vertices_string(self):
         vertices_comps = ['vertices', '('] + ['\t' + v.dict_string() for v in self.vertices] + [');']
@@ -48,11 +48,13 @@ class MeshDict(object):
                    '\n',
                    self.meters_string(),
                    '\n',
+                   self.vertices_string(),
+                   '\n',
                    self.blocks_string(),
                    '\n',
                    self.edges_string(),
                    '\n',
                    self.boundary_string(),
                    '\n',
-                   self.merge_pairs_string()] =
+                   self.merge_pairs_string()]
         return '\n'.join(s for s in d_comps)
