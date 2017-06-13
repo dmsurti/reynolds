@@ -5,7 +5,7 @@ class Vertex3(object):
         self.z = z
 
     def dict_string(self):
-        return "({}, {}, {})".format(self.x, self.y, self.z)
+        return "({} {} {})".format(self.x, self.y, self.z)
 
 
 class Block(object):
@@ -16,7 +16,7 @@ class Block(object):
 
     def dict_string(self):
         return "hex ({}) ({}) {}".format(' '.join(str(vl) for vl in self.vertex_labels),
-                                         ' '.join(str(n) for n in self.n_cells),
+                                         ' '.join(str(int(n)) for n in self.n_cells),
                                          self.grading.dict_string())
 
 
@@ -25,7 +25,7 @@ class SimpleGrading(object):
         self.exp_ratios = exp_ratios
 
     def dict_string(self):
-        return "simpleGrading ({})".format(' '.join(str(r) for r in self.exp_ratios))
+        return "simpleGrading ({})".format(' '.join(str(int(r)) for r in self.exp_ratios))
 
 
 class Face(object):
