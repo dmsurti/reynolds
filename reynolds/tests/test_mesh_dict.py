@@ -82,11 +82,3 @@ class TestMeshDict(TestCase):
     def test_merge_pairs(self):
         m_string = 'mergePatchPairs\n' + '(\n' + ');'
         self.assertEqual(m_string, self.mesh_dict.merge_pairs_string())
-
-    def test_dict_string(self):
-        print(self.mesh_dict.dict_string())
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        sample_dict_file_path = os.path.join(dir_path, 'blockMeshDictCavitySample')
-        with open(sample_dict_file_path, 'r') as f:
-            d_string = f.read()
-            self.assertEqual(d_string, self.mesh_dict.dict_string())
