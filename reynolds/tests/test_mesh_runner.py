@@ -6,7 +6,7 @@ from reynolds.tests.test_of import TestOFCase
 
 class TestMeshRunner(TestOFCase):
     def test_cavity_tutorial(self):
-        cavity_case_dir = os.path.join(self.temp_tutorials_dir, 'incompressible', 'icofoam',
+        cavity_case_dir = os.path.join(self.temp_tutorials_dir, 'incompressible', 'icoFoam',
                                        'cavity', 'cavity')
         r = MeshRunner(case_dir=cavity_case_dir)
         status, out, err = r.run()
