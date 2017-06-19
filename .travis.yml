@@ -21,7 +21,11 @@ before_install:
   - source /opt/openfoam4/etc/bashrc
 
 install:
+  - pip install codecov
   - pip install .
 
-script: pytest
+script:
+  - pytest
 
+after_success:
+  - codecov
