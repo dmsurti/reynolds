@@ -1,6 +1,11 @@
 Reynolds
 ========
 
+[![Build
+Status](https://travis-ci.org/dmsurti/reynolds.svg?branch=master)](https://travis-ci.org/dmsurti/reynolds)
+[![codecov](https://codecov.io/gh/dmsurti/reynolds/branch/master/graph/badge.svg)](https://codecov.io/gh/dmsurti/reynolds)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+
 **Reynolds** is a full featured, scriptable python API of components for the
 preprocessing and the solver environments of
 [OpenFoam](http://www.openfoam.com). These components can be easily combined
