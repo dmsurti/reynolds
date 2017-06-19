@@ -21,11 +21,12 @@ before_install:
   - source /opt/openfoam4/etc/bashrc
 
 install:
-  - pip install codecov
+  - pip install codecov && codecov -t 09c4ade4-651d-4620-b7f1-35dac3d2cf1c
   - pip install .
 
 script:
   - pytest
+  - coverage run -p -m nose.core -v reynolds/tests
 
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
