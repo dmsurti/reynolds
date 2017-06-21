@@ -3,6 +3,7 @@ Reynolds
 
 [![Build
 Status](https://travis-ci.org/dmsurti/reynolds.svg?branch=master)](https://travis-ci.org/dmsurti/reynolds)
+[![Documentation Status](https://readthedocs.org/projects/reynolds/badge/?version=latest)](http://reynolds.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/dmsurti/reynolds/branch/master/graph/badge.svg)](https://codecov.io/gh/dmsurti/reynolds)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
