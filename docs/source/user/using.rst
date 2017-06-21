@@ -9,6 +9,8 @@ Requirements
 * macOS 10.10 or later
 * Ubuntu 14.x or later
 
+.. _prerequisites-label:
+
 Pre-requisites
 ==============
 

@@ -26,6 +26,7 @@ The main documentation for this library is split into:
    :maxdepth: 2
    :caption: User Documentation
 
+   user/faq
    user/using
 
 .. _dev-docs:
