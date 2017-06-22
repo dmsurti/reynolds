@@ -24,3 +24,35 @@ Running with docker container on Ubuntu
 Please refer to [reynolds-docker](https://github.com/dmsurti/reynolds-docker)
 repository for instructions to build a docker image and run the container with
 the Blender addon to solve the cavity case tutorial.
+
+Documentation
+---
+
+* [User and Developer Docs](http://reynolds.readthedocs.io/en/latest/)
+* [API Docs](http://reynolds.readthedocs.io/en/latest/#api-docs)
+
+License
+---
+
+reynolds is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version. See the file [LICENSE](LICENSE.md) in this directory or
+[[http://www.gnu.org/licenses/]], for a description of the GNU General Public
+License terms under which you can copy the files.
+
+Author
+---
+
+[Deepak Surti](https://github.com/dmsurti)
+
+Contributing
+---
+
+To contribute to reynolds:
+
+* Please open an issue describing the bug, enhancement or any other improvement.
+* If possible, please supply the case directory that can help demonstrate the issue.
+* If the design involves a larger refactor, please open a issue to dicuss the refactor.
+* After discussion on the issue, you can submit a Pull Request by forking this project.
+* Please accompany your Pull Request with updates to test code.
