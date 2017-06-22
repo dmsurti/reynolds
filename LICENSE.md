@@ -1,4 +1,15 @@
                     GNU GENERAL PUBLIC LICENSE
+
+reynolds is Copyright (C) 2017
+Contact: dmsurti@gmail.com
+
+You may use, distribute and copy the reynolds software under the terms of GNU
+General Public License version 3, which is displayed below, or (at your option)
+any later version.
+
+--------------------------------------------------------------------------------
+
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
