@@ -1,6 +1,10 @@
                     GNU GENERAL PUBLIC LICENSE
 
-reynolds is Copyright (C) 2017
+Reynolds is Copyright (C) 2017:
+---
+Deepak S,
+Prabhu R (IIT Bombay), Shivasubramanian G (IIT Bombay)
+
 Contact: dmsurti@gmail.com
 
 You may use, distribute and copy the reynolds software under the terms of GNU
