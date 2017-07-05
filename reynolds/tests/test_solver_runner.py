@@ -40,5 +40,6 @@ class TestSolverRunner(TestOFCase):
         status, out, err = r.run()
         self.assertTrue(status)
         i = SolverRunner(solver_name='icoFoam', case_dir=cavity_case_dir)
-        status, out, err = i.run()
-        self.assertTrue(status)
+        for info in i.run():
+            pass # client can stream this info live
+        self.assertTrue(i.run_status)

@@ -26,7 +26,7 @@
 #------------------------------------------------------------------------------
 
 
-from subprocess import  Popen
+from subprocess import PIPE, Popen
 
 
 class SolverRunner(object):
@@ -43,16 +43,25 @@ class SolverRunner(object):
         """
         self.solver_name = solver_name
         self.case_dir = case_dir
+        self.run_status = False
 
-    def run(self):
+    def run_solver(self):
         """
         Runs the solver in the case directory.
 
-        :return: True, if solving succeeds, False otherwise. You can inspect err if solving fails.
+        :return: True, if solving succeeds, False otherwise.
         """
-        solver_proc = Popen([self.solver_name, '-case', self.case_dir])
-        out, err = solver_proc.communicate()
-        if solver_proc.poll() == 0:
-            return (True, out, err)
-        else:
-            return (False, out, err)
+        with Popen([self.solver_name, '-case', self.case_dir],
+                   stdout=PIPE,
+                   bufsize=1,
+                   universal_newlines=True) as p:
+            for info in p.stdout:
+                yield info
+        return p.returncode == 0
+
+    def run(self):
+        """
+        Runs the solver and stores the status of the run.
+        """
+        self.run_status = False # Reset a previous run status
+        self.run_status = yield from self.run_solver()
