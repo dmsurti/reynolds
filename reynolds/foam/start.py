@@ -80,9 +80,8 @@ class FoamRunner(object):
                                'OpenFOAM.sparsebundle'], cwd=path.expanduser('~'))
             out, err = foam_proc.communicate()
             status = foam_proc.poll()
-            if status == 0:
-                print("Source openfoam env vars...")
-                self.shell_source(self.source_path)
+            if status == 0 and self.shell_source(self.source_path):
+                print("Started Openfoam and Sourced openfoam env vars...")
                 return True
             else:
                 print("Could not start OpenFOAM")
@@ -95,12 +94,15 @@ class FoamRunner(object):
         Updates the environment with variables sourced from openfoam bash script.
 
         :param script: The path to the openform etc/bashrc script to be sourced
+
+        :return: True if env sourced succesfully. False otherwise.
         """
         pipe = Popen(". %s; env" % script, stdout=PIPE, shell=True)
         output = pipe.communicate()[0]
         env = dict((line.decode().split('=', 1) for line in output.splitlines() if '=' in line.decode()))
         os.environ.update(env)
         print('tutorials: ', os.environ['FOAM_TUTORIALS'])
+        return bool(env)
 
 
 if __name__ == '__main__':
