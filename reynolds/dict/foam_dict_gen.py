@@ -30,7 +30,20 @@ import os
 from mako.template import Template
 
 class FoamDictGenerator(object):
+    """
+    Generates a dict file from the given template in OpenFoam dict format.
+
+    """
     def __init__(self, json_obj, dict_template_filename):
+        """
+        Creates a dict generator for a given JSON object and an OpenFoam dict
+        template.
+
+        :param json_obj The JSON object as per the JSON schema for the OpenFoam
+        dict
+        :param dict_template_filename The template file used to generate the
+        OpenFoam dict.
+        """
         self.json_obj = json_obj
         templates_root_dir = os.path.dirname(os.path.realpath(__file__))
         template_file = os.path.join(templates_root_dir,

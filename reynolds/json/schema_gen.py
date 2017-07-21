@@ -32,7 +32,20 @@ import genson
 import python_jsonschema_objects as pjs
 
 class FoamDictJSONGenerator(object):
+    """
+    A JSON object generator for a JSON Schema representing an OpenFoam dict.
+
+    Generates a python class with bindings for the OpenFoam dict attributes in
+    JSON format.
+    """
     def __init__(self, schema_filename):
+        """
+        Creates a JSON object generator for a given JSON Schema.
+
+        :param schema_filename The JSON Schema file representing an OpenFoam i
+        dict.
+
+        """
         json_dir = os.path.dirname(os.path.realpath(__file__))
         json_file = os.path.join(json_dir, "schemas", schema_filename)
 
