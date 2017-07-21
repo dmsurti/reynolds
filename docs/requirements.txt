@@ -1,0 +1,3 @@
+genson==0.2.1
+python-jsonschema-objects==0.2.1
+Mako==1.0.7
