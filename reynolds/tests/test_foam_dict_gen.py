@@ -63,7 +63,7 @@ class TestBlockMeshDictGen(TestCase):
 
         # set blocks
         blocks_dict = {}
-        blocks_dict['vertex_nums'] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        blocks_dict['vertex_nums'] = [0, 1, 2, 3, 4, 5, 6, 7]
         blocks_dict['num_cells'] = [20, 20, 1]
         blocks_dict['grading'] = 'simpleGrading'
         blocks_dict['grading_x'] = [[1, 1, 1]]
@@ -85,7 +85,7 @@ class TestBlockMeshDictGen(TestCase):
 
         front_and_back = {}
         front_and_back['name'] = 'frontAndBack'
-        front_and_back['type'] = 'wall'
+        front_and_back['type'] = 'empty'
         front_and_back['faces'] = [[0, 3, 2, 1], [4, 5, 6, 7]]
 
         patches = [moving_wall, fixed_walls, front_and_back]
@@ -95,4 +95,15 @@ class TestBlockMeshDictGen(TestCase):
         foam_dict_gen = FoamDictGenerator(block_mesh_dict_json,
                                           'blockMeshDict.foam')
         block_mesh_dict = foam_dict_gen.foam_dict
+        print(block_mesh_dict)
+
+        expected_dict_dir = os.path.dirname(os.path.realpath(__file__))
+        expected_dict_file = os.path.join(expected_dict_dir, 'blockMeshDictSample')
+        with open(expected_dict_file, 'r') as f:
+            d = f.read()
+            print('--------')
+            print(d)
+            self.maxDiff = 490
+            self.assertEqual(block_mesh_dict, d)
+
         self.assertIsNotNone(block_mesh_dict)
