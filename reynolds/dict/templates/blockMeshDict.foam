@@ -19,7 +19,7 @@ FoamFile
 ## ------------------------
 ## convertToMeters template
 ## ------------------------
-convertToMeters ${convertToMeters}
+convertToMeters ${convertToMeters};
 ## -----------------
 ## vertices vars
 ## -----------------
@@ -32,7 +32,7 @@ convertToMeters ${convertToMeters}
 vertices
 (
   % for v in vertices:
-    (${' '.join(str(c) for c in v)})
+  (${' '.join(str(c) for c in v)})
   % endfor
 
 );
@@ -53,25 +53,25 @@ vertices
 ## -----------------
 blocks
 (
-    hex (${' '.join(str(v) for v in vertex_nums)}) (${' '.join(str(c) for c in num_cells)})
-    ${grading}
+  hex (${' '.join(str(v) for v in vertex_nums)}) (${' '.join(str(c) for c in num_cells)})
+  ${grading}
+  (
     (
-      (
-      % for x in grading_x:
-        (${' '.join(str(c) for c in x)})
-      % endfor
-      )
-      (
-      % for y in grading_y:
-        (${' '.join(str(c) for c in y)})
-      % endfor
-      )
-      (
-      % for z in grading_z:
-        (${' '.join(str(c) for c in z)})
-      % endfor
-      )
+    % for x in grading_x:
+      (${' '.join(str(c) for c in x)})
+    % endfor
     )
+    (
+    % for y in grading_y:
+      (${' '.join(str(c) for c in y)})
+    % endfor
+    )
+    (
+    % for z in grading_z:
+      (${' '.join(str(c) for c in z)})
+    % endfor
+    )
+  )
 );
 ## ----------
 ## edges vars
