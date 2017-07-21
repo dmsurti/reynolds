@@ -42,9 +42,7 @@ class FoamDictJSONGenerator(object):
         """
         Creates a JSON object generator for a given JSON Schema.
 
-        :param schema_filename The JSON Schema file representing an OpenFoam i
-        dict.
-
+        :param schema_filename: The JSON Schema file representing the dict.
         """
         json_dir = os.path.dirname(os.path.realpath(__file__))
         json_file = os.path.join(json_dir, "schemas", schema_filename)

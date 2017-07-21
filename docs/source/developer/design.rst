@@ -13,30 +13,46 @@ blockMesh and solvers etc can be executed using a python subprocess with POpen.
 
 This package contains a single FoamRunner class which does the above.
 
-blockmesh
----------
+This package also provides a class FoamCmdRunner which is used to execute any
+OpenFoam command that is sourced after starting OpenFoam. The command runner
+class requires the command name and the case directory in which to execute the
+command.
 
-The blockmesh package is responsible for generating an in-memory blockMeshDict
-strucutre. It does this with a MeshDict class which delegates to various classes
-such as Vertex3, Block, Face, SimpleGrading, BoundaryRegion that represent
-different sections of the blockMeshDict.
+Both the starter and the runner class emit the progress which can be `yield`ed
+in the client code that uses these. For a sample, see the
+`tests/test_foam_cmd_runner.py`.
+
+json
+----
+
+The json package is responsible for generating an in-memory JSON object with
+keys that are the attributes of the OpenFoam dict file it represents. This is
+done by generating a schema using a sample JSON file for the dict file. This
+schema is then updated with title and required attributes are deleted.
+
+The class FoamDictJSONGenerator reads such a schema file and generates a JSON
+object with dict attributes as it's keys.
+
+See: `samples/blockMeshDict.json` and `schemas/blockMeshDict.schema`.
 
 You can study the `blockMeshDict specification here`_
 
 .. _blockMeshDict specification here:
    https://cfd.direct/openfoam/user-guide/blockMesh/#x25-1750005.3
 
-This package also handles executing the blockMesh generator. This is done with
-the MeshRunner class which executes the blockMesh given a case directory. This
-class runs the blockMesh in a python subprocess.
+dict
+----
 
+The dict package is responsible for generating any OpenFoam dict file, given a
+JSON object which contains the data to be written in that dict file. This JSON
+object is
+based on a schema which represents the OpenFoam dict file to be generated.
 
-solver
-------
+The class FoamDictGenerator generates the OpenFoam dict file given the JSON
+object and the mako template for the dict file.
 
-The solver package is responsible for running any solver given the solver name.
-The SolverRunner class runs a solver given it's name in a given case directory.
-This class runs the solver in a python subprocess.
+See: `blockMeshDict.foam` makeo template under `dict/templates` directory to
+understand how it generates a `blockMeshDict` file.
 
 tests
 -----

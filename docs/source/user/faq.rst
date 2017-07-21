@@ -22,7 +22,7 @@ A. Currently, blockMesh is supported. More, including snappyHexMesh will be adde
 
 5. Is this cross-platform?
 
-A. Currently, it supports macOS and linux platforms. However the Docker image runs only on Linux (tested on Ubunut) and can work with macOS if you can share the mac host X11. The Windows platform has not been tested.
+A. Currently, it supports macOS and linux platforms. However the Docker image runs only on Linux (tested on Ubuntu) and can work with macOS if you can share the mac host X11. The Windows platform has not been tested.
 
    The final version will support all of Linux, macOS and Windows.
 
