@@ -7,9 +7,9 @@ cd <to-clone-repo-dir>/reynolds/json
 genson -i 2 samples/sample.json > schemas/sample.schema
 ```
 
-You can then modify the blockMeshDict.schema to remove all the required
-properties and making any other changes.
+You can then modify the sample.schema to remove all the required properties, add
+a title attribute and making any other changes.
 
-This schema is then used by `FoamDictJSONGenerator` class to auto generate a
-python class with bindings for a JSON instance for this schema, using
+This schema is used by `FoamDictJSONGenerator` class to auto generate a python
+class with bindings for a JSON instance for this schema, using
 `python_jsonschema_objects` library.
