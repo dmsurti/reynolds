@@ -26,32 +26,42 @@
 #------------------------------------------------------------------------------
 
 
-from subprocess import Popen
+from subprocess import PIPE, Popen
 
 
-class MeshRunner(object):
+class FoamCmdRunner(object):
     """
-    Runs the blockMesh to generate the mesh for a given case.
+    Runs the foam command given the cmd name for a given case.
+
     """
-    def __init__(self, case_dir=None):
+    def __init__(self, cmd_name, case_dir=None):
         """
-        Creates a MeshRunner object for a given case directory.
+        Creates a foam command runner for a given command with a case directory.
 
+        :param cmd_name: The command name, with correct case
         :param case_dir: The absolute path to the case directory on disk
         """
+        self.cmd_name = cmd_name
         self.case_dir = case_dir
+        self.run_status = False
+
+    def run_command(self):
+        """
+        Runs the command in the case directory.
+
+        :return: True, if solving succeeds, False otherwise.
+        """
+        with Popen([self.cmd_name, '-case', self.case_dir],
+                   stdout=PIPE,
+                   bufsize=1,
+                   universal_newlines=True) as p:
+            for info in p.stdout:
+                yield info
+        return p.returncode == 0
 
     def run(self):
         """
-        Runs the blockMesh to generate the mesh.
-
-        :return: True, if success, False otherwise. You can inspect err when blockMesh fails.
+        Runs the solver and stores the status of the run.
         """
-        blockmesh_proc = Popen(['blockMesh', '-case', self.case_dir])
-        out, err = blockmesh_proc.communicate()
-        if blockmesh_proc.poll() == 0:
-            checkmesh_proc = Popen(['checkMesh', '-case', self.case_dir])
-            out, err = checkmesh_proc.communicate()
-            return (checkmesh_proc.poll() == 0, out, err)
-        else:
-            return (False, out, err)
+        self.run_status = False # Reset a previous run status
+        self.run_status = yield from self.run_command()
