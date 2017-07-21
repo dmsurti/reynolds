@@ -4,6 +4,15 @@ reynolds.foam package
 Submodules
 ----------
 
+reynolds.foam.cmd_runner module
+-------------------------------
+
+.. automodule:: reynolds.foam.cmd_runner
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 reynolds.foam.start module
 --------------------------
 

@@ -6,9 +6,9 @@ Subpackages
 
 .. toctree::
 
-    reynolds.blockmesh
+    reynolds.dict
     reynolds.foam
-    reynolds.solver
+    reynolds.json
 
 Module contents
 ---------------

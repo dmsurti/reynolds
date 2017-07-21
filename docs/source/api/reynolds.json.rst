@@ -1,13 +1,13 @@
-reynolds.solver package
+reynolds.json package
 =======================
 
 Submodules
 ----------
 
-reynolds.solver.solver_runner module
+reynolds.json.schema_gen module
 ------------------------------------
 
-.. automodule:: reynolds.solver.solver_runner
+.. automodule:: reynolds.json.schema_gen
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ reynolds.solver.solver_runner module
 Module contents
 ---------------
 
-.. automodule:: reynolds.solver
+.. automodule:: reynolds.json
     :members:
     :undoc-members:
     :show-inheritance:
