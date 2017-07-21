@@ -23,6 +23,7 @@ before_install:
 install:
   - pip install codecov && codecov -t 09c4ade4-651d-4620-b7f1-35dac3d2cf1c
   - pip install .
+  - pip install -r requirements.txt
 
 script:
   - pytest

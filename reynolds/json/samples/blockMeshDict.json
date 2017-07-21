@@ -1,0 +1,71 @@
+{
+
+	"FoamFile": {
+		"version": "2.0",
+		"format":  "ascii",
+		"class":   "dictionary",
+		"object":  "blockMeshDict"
+	},
+
+	"convertToMeters": 0.1,
+
+	"vertices": [
+		[0.0, 0.0, 0.0],
+		[1.0, 0.0, 0.0]
+	],
+
+	"blocks": {
+		"vertex_nums": [0, 1, 2, 3, 4, 5, 6, 7],
+		"num_cells": [20, 20, 1],
+		"simpleGrading": false,
+		"edgeGrading": false,
+		"grading_x": [
+			[0.2, 0.3, 4],
+			[0.6, 0.4, 1]
+		],
+		"grading_y": [
+			[0.2, 0.3, 4],
+			[0.6, 0.4, 1]
+		],
+		"grading_z": [
+			[0.2, 0.3, 4],
+			[0.6, 0.4, 1]
+		]
+	},
+
+	"edges": {
+		"arc": false,
+		"spline": false,
+		"polyLine": false,
+		"BSpline": false,
+		"line": false,
+		"start": 1,
+		"end": 5,
+		"interpolation_point": [1.1, 0.0, 0.5]
+	},
+
+	"boundary": [{
+			"name": "inlet",
+      "type": "wall",
+			"neighborPatch": "outlet",
+			"faces": [
+				[0, 1, 5, 4],
+				[0, 3, 2, 1]
+			]
+		},
+		{
+			"name": "outlet",
+      "type": "wall",
+			"neighborPatch": "outlet",
+			"faces": [
+				[0, 1, 5, 4],
+				[0, 3, 2, 1]
+			]
+		}
+	],
+
+	"mergePatchPairs": [
+		["inlet", "outlet"],
+		["inlet1", "outlet1"]
+	]
+}

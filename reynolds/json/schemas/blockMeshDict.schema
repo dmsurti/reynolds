@@ -1,0 +1,140 @@
+{
+  "title": "Blockmeshdict Schema",
+  "type": "object",
+  "properties": {
+    "FoamFile": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "class": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string"
+        }
+      }
+    },
+    "convertToMeters": {
+      "type": "number"
+    },
+    "vertices": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "blocks": {
+      "type": "object",
+      "properties": {
+        "vertex_nums": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "num_cells": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "grading": {
+          "type": "string",
+          "enum": ["simpleGrading", "edgeGrading"]
+        },
+        "grading_x": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "grading_y": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "grading_z": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "object",
+      "properties": {
+        "edge_type": {
+          "type": "string",
+          "enum": ["arc", "spline", "polyLine", "BSpline", "line"]
+        },
+        "start": {
+          "type": "integer"
+        },
+        "end": {
+          "type": "integer"
+        },
+        "interpolation_point": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["wall", "empty", "patch", "cyclic"]
+          },
+          "neighborPatch": {
+            "type": "string"
+          },
+          "faces": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mergePatchPairs": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

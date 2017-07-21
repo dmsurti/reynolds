@@ -26,32 +26,29 @@
 #------------------------------------------------------------------------------
 
 
-from subprocess import Popen
+import os
+from mako.template import Template
 
-
-class MeshRunner(object):
+class FoamDictGenerator(object):
     """
-    Runs the blockMesh to generate the mesh for a given case.
+    Generates a dict file from the given template in OpenFoam dict format.
+
     """
-    def __init__(self, case_dir=None):
+    def __init__(self, json_obj, dict_template_filename):
         """
-        Creates a MeshRunner object for a given case directory.
+        Creates a dict generator for a given JSON object and an OpenFoam dict
+        template.
 
-        :param case_dir: The absolute path to the case directory on disk
+        :param json_obj The JSON object as per the JSON schema for the OpenFoam
+        dict
+        :param dict_template_filename The template file used to generate the
+        OpenFoam dict.
         """
-        self.case_dir = case_dir
+        self.json_obj = json_obj
+        templates_root_dir = os.path.dirname(os.path.realpath(__file__))
+        template_file = os.path.join(templates_root_dir,
+                                     'templates', dict_template_filename)
+        foam_template = Template(filename=template_file)
+        self.foam_dict = foam_template.render(**self.json_obj)
 
-    def run(self):
-        """
-        Runs the blockMesh to generate the mesh.
 
-        :return: True, if success, False otherwise. You can inspect err when blockMesh fails.
-        """
-        blockmesh_proc = Popen(['blockMesh', '-case', self.case_dir])
-        out, err = blockmesh_proc.communicate()
-        if blockmesh_proc.poll() == 0:
-            checkmesh_proc = Popen(['checkMesh', '-case', self.case_dir])
-            out, err = checkmesh_proc.communicate()
-            return (checkmesh_proc.poll() == 0, out, err)
-        else:
-            return (False, out, err)

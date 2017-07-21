@@ -26,3 +26,13 @@
 #------------------------------------------------------------------------------
 
 
+import os
+from unittest import TestCase
+
+from reynolds.json.schema_gen import FoamDictJSONGenerator
+
+class TestSchemaGen(TestCase):
+    def test_json_generation(self):
+        json_gen = FoamDictJSONGenerator('blockMeshDict.schema')
+        json_obj = json_gen.json_obj
+        self.assertIsNotNone(json_obj)
