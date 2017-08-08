@@ -4,10 +4,10 @@ reynolds.dict package
 Submodules
 ----------
 
-reynolds.dict.foam_dict_gen module
+reynolds.dict.parser
 -----------------------------------------
 
-.. automodule:: reynolds.dict.foam_dict_gen
+.. automodule:: reynolds.dict.parser
     :members:
     :undoc-members:
     :show-inheritance:

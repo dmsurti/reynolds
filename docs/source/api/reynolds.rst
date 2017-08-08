@@ -8,7 +8,6 @@ Subpackages
 
     reynolds.dict
     reynolds.foam
-    reynolds.json
 
 Module contents
 ---------------

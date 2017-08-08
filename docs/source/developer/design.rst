@@ -22,37 +22,21 @@ Both the starter and the runner class emit the progress which can be `yield`ed
 in the client code that uses these. For a sample, see the
 `tests/test_foam_cmd_runner.py`.
 
-json
-----
-
-The json package is responsible for generating an in-memory JSON object with
-keys that are the attributes of the OpenFoam dict file it represents. This is
-done by generating a schema using a sample JSON file for the dict file. This
-schema is then updated with title and required attributes are deleted.
-
-The class FoamDictJSONGenerator reads such a schema file and generates a JSON
-object with dict attributes as it's keys.
-
-See: `samples/blockMeshDict.json` and `schemas/blockMeshDict.schema`.
-
-You can study the `blockMeshDict specification here`_
-
-.. _blockMeshDict specification here:
-   https://cfd.direct/openfoam/user-guide/blockMesh/#x25-1750005.3
-
 dict
 ----
 
-The dict package is responsible for generating any OpenFoam dict file, given a
-JSON object which contains the data to be written in that dict file. This JSON
-object is
-based on a schema which represents the OpenFoam dict file to be generated.
+The dict package is responsible for reading/writing any OpenFoam dict file.
 
-The class FoamDictGenerator generates the OpenFoam dict file given the JSON
-object and the mako template for the dict file.
+The class `ReynoldsFoamDict` uses `PyFoam` provided `ParsedParameterFile` to
+read and write foam dicts. You need to initialize a `ReynoldsFoamDict` with a
+template for the foam dict you want to read/write. The templates are availabel
+in `dict/templates` directory.
 
-See: `blockMeshDict.foam` makeo template under `dict/templates` directory to
-understand how it generates a `blockMeshDict` file.
+The requirement of a template dict file is because ParsedParameterFile cannot be
+intialized without a foam dict file and so we use the template to start with an
+initial, empty foam dict.
+
+See: `blockMeshDict.foam` template under `dict/templates`.
 
 tests
 -----

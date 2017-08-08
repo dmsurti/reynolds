@@ -60,68 +60,73 @@ Generating blockMeshDict
 
 To generate a blockMeshDict for the cavity tutorial, you could do::
 
-   from reynolds.json.schema_gen import FoamDictJSONGenerator
-   from reynolds.dict.foam_dict_gen import FoamDictGenerator
+   from reynolds.dict.parser import ReynoldsFoamDict
 
-   # Create a JSON object to store blockMeshDict data
-   block_mesh_dict_gen = FoamDictJSONGenerator('blockMeshDict.schema')
-   block_mesh_dict_json = block_mesh_dict_gen.json_obj
+   block_mesh_dict = ReynoldsFoamDict('blockMeshDict.foam')
+   self.assertIsNotNone(block_mesh_dict)
 
-   # set header info
-   block_mesh_dict_json['version'] = '2.0'
-   block_mesh_dict_json['format'] = 'ascii'
-   block_mesh_dict_json['class'] = 'dictionary'
-   block_mesh_dict_json['object'] = 'blockMeshDict'
+   # add vertices
+   vertices = []
+   vertices.append([0, 0, 0])
+   vertices.append([1, 0, 0])
+   vertices.append([1, 1, 0])
+   vertices.append([0, 1, 0])
+   vertices.append([0, 0, 0.1])
+   vertices.append([1, 0, 0.1])
+   vertices.append([1, 1, 0.1])
+   vertices.append([0, 1, 0.1])
+   block_mesh_dict['vertices'] = vertices
 
-   # set convert to meters
-   block_mesh_dict_json['convertToMeters'] = 0.1
+   # add blocks
+   blocks = []
+   blocks.append('hex')
+   blocks.append([0, 1, 2, 3, 4, 5, 6, 7])
+   blocks.append([20, 20, 1])
+   blocks.append('simpleGrading')
+   blocks.append([1, 1, 1])
+   block_mesh_dict['blocks'] = blocks
+   self.assertEqual(block_mesh_dict['blocks'],
+                     ['hex', [0, 1, 2, 3, 4, 5, 6, 7], '(20 20 1)',
+                     'simpleGrading', '(1 1 1)'])
 
-   # set vertices
-   block_mesh_dict_json['vertices'] = []
-   block_mesh_dict_json['vertices'].append([0, 0, 0])
-   block_mesh_dict_json['vertices'].append([1, 0, 0])
-   block_mesh_dict_json['vertices'].append([1, 1, 0])
-   block_mesh_dict_json['vertices'].append([0, 1, 0])
-   block_mesh_dict_json['vertices'].append([0, 0, 0.1])
-   block_mesh_dict_json['vertices'].append([1, 0, 0.1])
-   block_mesh_dict_json['vertices'].append([1, 1, 0.1])
-   block_mesh_dict_json['vertices'].append([0, 1, 0.1])
+   # add edges
+   self.assertEqual(block_mesh_dict['edges'], [])
+   edges = []
+   edges.append('arc')
+   edges.append(1)
+   edges.append(5)
+   edges.append([1.1, 0.0, 0.5])
+   block_mesh_dict['edges'] = edges
 
-   # set blocks
-   blocks_dict = {}
-   blocks_dict['vertex_nums'] = [0, 1, 2, 3, 4, 5, 6, 7]
-   blocks_dict['num_cells'] = [20, 20, 1]
-   blocks_dict['grading'] = 'simpleGrading'
-   blocks_dict['grading_x'] = [[1, 1, 1]]
-   blocks_dict['grading_y'] = [[0.2, 0.3, 4], [0.6, 0.4, 1],
-                               [0.2, 0.3, 0.25]]
-   blocks_dict['grading_z'] = [[1, 1, 1]]
-   block_mesh_dict_json['blocks'] = blocks_dict
-
-   # set boundary
+   boundary = []
+   # add moving wall
+   boundary.append('movingWall')
    moving_wall = {}
-   moving_wall['name'] = 'movingWall'
-   moving_wall['type'] = 'wall'
    moving_wall['faces'] = [[3, 7, 6, 2]]
-
+   moving_wall['type'] = 'wall'
+   boundary.append(moving_wall)
+   # add fixed walls
+   boundary.append('fixedWalls')
    fixed_walls = {}
-   fixed_walls['name'] = 'fixedWalls'
-   fixed_walls['type'] = 'wall'
    fixed_walls['faces'] = [[0, 4, 7, 3], [2, 6, 5, 1], [1, 5, 4, 0]]
-
+   fixed_walls['type'] = 'wall'
+   boundary.append(fixed_walls)
+   # add front and back
+   boundary.append('frontAndBack')
    front_and_back = {}
-   front_and_back['name'] = 'frontAndBack'
-   front_and_back['type'] = 'empty'
    front_and_back['faces'] = [[0, 3, 2, 1], [4, 5, 6, 7]]
+   front_and_back['type'] = 'empty'
+   boundary.append(front_and_back)
+   block_mesh_dict['boundary'] = boundary
 
-   patches = [moving_wall, fixed_walls, front_and_back]
-   block_mesh_dict_json['boundary'] = patches
+   # add mergePatchPairs
+   mergePatchPairs = []
+   mergePatchPairs.append(['inlet1', 'outlet1'])
+   mergePatchPairs.append(['inlet2', 'outlet2'])
+   block_mesh_dict['mergePatchPairs'] = mergePatchPairs
 
-   # generate the blockMeshDict
-   foam_dict_gen = FoamDictGenerator(block_mesh_dict_json,
-                                     'blockMeshDict.foam')
-   block_mesh_dict = foam_dict_gen.foam_dict
-   
+   print(block_mesh_dict)
+
 The above generates an in memory blockMeshDict. To write this to a file on disk,
 you can do::
 
@@ -129,7 +134,7 @@ you can do::
    file_path = os.path.join(case_dir, 'system', 'blockMeshDict')
 
    with open(file_path, 'w') as f:
-       f.write(block_mesh_dict)
+       f.write(str(block_mesh_dict))
 
 Running a solver
 ================
