@@ -1,144 +1,39 @@
-## -----------------
-## header vars
-## -----------------
-<%
-  class_key = 'class'
-  class_type = context.get('class')
-%>
-## -----------------
-## header template
-## -----------------
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.x                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
 FoamFile
 {
-  version   ${version};
-  format    ${format};
-  ${class_key}     ${class_type};
-  object    ${object};
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
 }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-## ------------------------
-## convertToMeters template
-## ------------------------
-convertToMeters ${convertToMeters};
-## -----------------
-## vertices vars
-## -----------------
-<%
-  vertices = context.get('vertices')
-%>
-## -----------------
-## vertices template
-## -----------------
+convertToMeters;
+
 vertices
 (
-  % for v in vertices:
-  (${' '.join(str(c) for c in v)})
-  % endfor
-
 );
-## -----------------
-## blocks vars
-## -----------------
-<%
-  blocks = context.get('blocks')
-  vertex_nums = blocks['vertex_nums']
-  num_cells = blocks['num_cells']
-  grading_x = blocks['grading_x']
-  grading_y = blocks['grading_y']
-  grading_z = blocks['grading_z']
-  grading = blocks['grading']
-%>
-## -----------------
-## blocks template
-## -----------------
+
 blocks
 (
-  hex (${' '.join(str(v) for v in vertex_nums)}) (${' '.join(str(c) for c in num_cells)})
-  ${grading}
-  (
-    (
-    % for x in grading_x:
-      (${' '.join(str(c) for c in x)})
-    % endfor
-    )
-    (
-    % for y in grading_y:
-      (${' '.join(str(c) for c in y)})
-    % endfor
-    )
-    (
-    % for z in grading_z:
-      (${' '.join(str(c) for c in z)})
-    % endfor
-    )
-  )
 );
-## ----------
-## edges vars
-## ----------
-<%
-  edges = context.get('edges')
-  if edges:
-    start = edges['start']
-    end = edges['end']
-    ip_point = edges['interpolation_point']
-    edgeType = edges['edgeType']
-%>
-## --------------
-## edges template
-## --------------
+
 edges
 (
-  % if edges:
-  % if start and end:
-  ${edgeType} ${start} ${end} (${' '.join(str(c) for c in ip_point if edgeType != 'line')})  
-  % endif
-  % endif
 );
-## -------------
-## boundary vars
-## -------------
-<%
-  boundary = context.get('boundary')
-%>
-## -----------------
-## boundary template
-## -----------------
+
 boundary
 (
-% for b in boundary:
-  <%
-    name = b['name']
-    type = b['type']
-    faces = b['faces']
-    np = b['neighborPatch']
-  %>
-  ${name}
-  {
-    type ${type};
-    % if np:
-    neighborPatch ${np}
-    % endif
-    faces
-    (
-      % for f in faces:
-        (${' '.join(str(c) for c in f)})
-      % endfor
-    );
-  }
-% endfor
 );
-## --------------------
-## mergePatchPairs vars
-## --------------------
-<%
-  mpp = context.get('mergePatchPairs')
-%>
+
 mergePatchPairs
 (
-  % if mpp:
-  % for pairs in mpp:
-    (${', '.join(patch for patch in pairs)})
-  % endfor
-  % endif
 );
+
+// ************************************************************************* //
