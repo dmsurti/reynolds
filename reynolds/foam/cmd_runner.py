@@ -56,7 +56,10 @@ class FoamCmdRunner(object):
                    bufsize=1,
                    universal_newlines=True) as p:
             for info in p.stdout:
-                yield info
+                lines = info.splitlines()
+                for line in lines:
+                    if len(line) > 0 and not line.isspace():
+                        yield line.rstrip('\n')
         return p.returncode == 0
 
     def run(self):
