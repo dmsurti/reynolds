@@ -34,7 +34,7 @@ class FoamCmdRunner(object):
     Runs the foam command given the cmd name for a given case.
 
     """
-    def __init__(self, cmd_name, case_dir=None):
+    def __init__(self, cmd_name, case_dir=None, cmd_flags=[]):
         """
         Creates a foam command runner for a given command with a case directory.
 
@@ -43,6 +43,7 @@ class FoamCmdRunner(object):
         """
         self.cmd_name = cmd_name
         self.case_dir = case_dir
+        self.cmd_flags = cmd_flags
         self.run_status = False
 
     def run_command(self):
@@ -51,7 +52,7 @@ class FoamCmdRunner(object):
 
         :return: True, if solving succeeds, False otherwise.
         """
-        with Popen([self.cmd_name, '-case', self.case_dir],
+        with Popen([self.cmd_name, '-case', self.case_dir] + self.cmd_flags,
                    stdout=PIPE,
                    bufsize=1,
                    universal_newlines=True) as p:
