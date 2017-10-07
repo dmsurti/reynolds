@@ -32,7 +32,7 @@ setup(
         name='reynolds',
         version='0.0.1',
         packages=['reynolds', 'reynolds.foam', 'reynolds.tests',
-                  'reynolds.dict'],
+                  'reynolds.dict', 'reynolds.dict.templates'],
         package_data={'':['**/*.json', '**/*.schema', '**/*.foam']},
         url='https://github.com/dmsurti/reynolds',
         license='GPL v3.0',

@@ -34,15 +34,21 @@ class ReynoldsFoamDict(dict):
     """
     Read and write any foam dictionary, using python dictionary.
     """
-    def __init__(self, dict_template_filename):
+    def __init__(self, dict_template_filename, solver_name=None):
         """
         Creates an inital empty python dictionary for a given foam dict.
 
         :param dict_template_filname: The foam dict template filename
         """
         templates_root_dir = os.path.dirname(os.path.realpath(__file__))
-        template_file = os.path.join(templates_root_dir,
-                                     'templates', dict_template_filename)
+        if solver_name:
+            template_file = os.path.join(templates_root_dir,
+                                         'templates', solver_name,
+                                         dict_template_filename)
+        else:
+            template_file = os.path.join(templates_root_dir,
+                                         'templates', dict_template_filename)
+
         self.__foam_dict__ = ParsedParameterFile(template_file)
 
     def __convert(self, element, parent=None):
