@@ -9,10 +9,6 @@ services:
     - docker
 
 before_install:
-  # temp mongodb fix
-  # see: https://github.com/travis-ci/travis-ci/issues/8554
-  - sudo rm /etc/apt/sources.list.d/mongodb-3.2.list
-
   - sudo apt-get -qq update
   - sudo apt-get install -y software-properties-common python-software-properties
   - sudo apt-get install -y wget curl bzip2
