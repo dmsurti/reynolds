@@ -27,6 +27,7 @@
 
 
 import os
+import multiprocessing
 
 from reynolds.foam.cmd_runner import FoamCmdRunner
 from reynolds.tests.test_of import TestOFCase

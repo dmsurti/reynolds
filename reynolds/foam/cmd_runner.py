@@ -52,7 +52,7 @@ class FoamCmdRunner(object):
 
         :return: True, if solving succeeds, False otherwise.
         """
-        with Popen([self.cmd_name, '-case', self.case_dir] + self.cmd_flags,
+        with Popen([self.cmd_name] + self.cmd_flags + ['-case', self.case_dir],
                    stdout=PIPE,
                    bufsize=1,
                    universal_newlines=True) as p:
