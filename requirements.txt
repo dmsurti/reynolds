@@ -34,7 +34,7 @@ pytest-cov==2.5.1
 python-coveralls==2.9.1
 python-jsonschema-objects==0.2.1
 pytz==2017.2
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.1
 reynolds==0.0.1
 simplegeneric==0.8.1
